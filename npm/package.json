@@ -1,6 +1,6 @@
 {
   "name": "nipo-tunnel",
-  "version": "0.0.16",
+  "version": "0.1.0",
   "description": "Secure HTTP tunnels from localhost to the internet",
   "bin": {
     "nipo": "bin/nipo"
