@@ -113,12 +113,13 @@ func (m TunnelModel) ShutdownWithFeedback() {
 		}
 	}
 
+	tr := GetT()
 	linesWritten := 0
 	if len(subs) > 0 {
 		fmt.Print("\n")
 		linesWritten++
 		for _, s := range subs {
-			fmt.Printf("  \033[33m⣿\033[0m  Đang giải phóng subdomain '%s'...\n", s)
+			fmt.Printf("  \033[33m⣿\033[0m  "+tr.ReleasingSubdomain+"\n", s)
 			linesWritten++
 		}
 		fmt.Print("\n")

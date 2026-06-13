@@ -47,6 +47,7 @@ type Translation struct {
 	DropStar             string
 	ErrorPrefix          string
 	ErrCFRateLimit       string
+	ReleasingSubdomain   string
 }
 
 // Locales maps language codes to their respective Translation bundles.
@@ -95,6 +96,7 @@ var Locales = map[string]Translation{
 		CmdCompletionShort:   "Generate the autocompletion script for the specified shell",
 		CmdHelpShort:         "Help about any command",
 		FlagHelpUsage:        "help for nipo",
+		ReleasingSubdomain:   "Unregistering subdomain '%s'...",
 	},
 	"vi": {
 		Title:                "Nipo Tunnel phát triển bởi ngtuonghy",
@@ -140,6 +142,7 @@ var Locales = map[string]Translation{
 		CmdCompletionShort:   "Tạo autocompletion script cho shell",
 		CmdHelpShort:         "Hiển thị trợ giúp cho lệnh",
 		FlagHelpUsage:        "Trợ giúp cho nipo",
+		ReleasingSubdomain:   "Đang huỷ đăng ký subdomain '%s'...",
 	},
 }
 
