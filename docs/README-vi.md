@@ -36,7 +36,7 @@
 </div>
 
 <div align="center">
-  <img src="assets/demo.jpg" alt="Nipo Terminal UI Demo">
+  <video src="https://github.com/user-attachments/assets/6382c1f1-bde6-4d60-b1e4-e370e45cc122" controls="controls" muted="muted" autoplay="autoplay" width="100%"></video>
 </div>
 
 <!-- TABLE OF CONTENTS -->
