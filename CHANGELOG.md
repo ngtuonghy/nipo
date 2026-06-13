@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.0...v0.2.1) (2026-06-13)
+
+
+### Bug Fixes
+
+* **cli:** resolve i18n translation issues ([4321b40](https://github.com/ngtuonghy/nipo-tunnel/commit/4321b403836962dc84f7af48cd1324d81c031641))
+
 ## [0.2.0](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.1.0...v0.2.0) (2026-06-13)
 
 

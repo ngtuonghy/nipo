@@ -1,6 +1,6 @@
 {
   "name": "nipo-backend",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Nipo Tunnel Backend API",
   "scripts": {
     "dev": "wrangler dev",
