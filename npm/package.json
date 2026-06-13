@@ -1,0 +1,26 @@
+{
+  "name": "nipo",
+  "version": "0.0.1",
+  "description": "Secure HTTP tunnels from localhost to the internet",
+  "bin": {
+    "nipo": "bin/nipo"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngtuonghy/nipo"
+  },
+  "keywords": [
+    "tunnel",
+    "ngrok",
+    "localhost",
+    "cloudflare"
+  ],
+  "author": "ngtuonghy",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  }
+}

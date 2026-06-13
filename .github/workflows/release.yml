@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-binaries:
+    name: Build Go Binaries
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goos: windows
+            goarch: amd64
+            release_name: nipo-windows-amd64.exe
+          - goos: linux
+            goarch: amd64
+            release_name: nipo-linux-amd64
+          - goos: linux
+            goarch: arm64
+            release_name: nipo-linux-arm64
+          - goos: darwin
+            goarch: amd64
+            release_name: nipo-darwin-amd64
+          - goos: darwin
+            goarch: arm64
+            release_name: nipo-darwin-arm64
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.3'
+
+      - name: Build binary
+        run: |
+          cd cli
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -ldflags "-s -w -X nipo/pkg/ui.AppVersion=$TAG_VERSION" -o ../dist/${{ matrix.release_name }} ./cmd/nipo
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.release_name }}
+          path: dist/${{ matrix.release_name }}
+          if-no-files-found: error
+          retention-days: 1
+
+  create-release:
+    name: Create GitHub Release
+    needs: build-binaries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          merge-multiple: true
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-npm:
+    name: Publish to NPM
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Sync version and publish
+        run: |
+          cd npm
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          npm version --no-git-tag-version $TAG_VERSION
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,10 @@
+# Binaries
+*.exe
+*.exe~
+nipo
+dist/
+bin/
+
+# OS files
+.DS_Store
+Thumbs.db

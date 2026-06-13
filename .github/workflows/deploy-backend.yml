@@ -1,0 +1,34 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'backend/**'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  deploy:
+    name: Deploy to Cloudflare Workers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: 'backend'
