@@ -20,3 +20,4 @@ config.yml
 *.njsproj
 *.sln
 *.sw?
+.agents/

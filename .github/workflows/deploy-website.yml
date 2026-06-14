@@ -1,17 +1,15 @@
-name: Deploy Backend
+name: Deploy Website
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'backend/**'
-      - '!backend/package.json'
-      - '!backend/package-lock.json'
+      - 'website/**'
 
 jobs:
   deploy:
-    name: Deploy Backend to Cloudflare
+    name: Deploy Website to Cloudflare Pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,11 +22,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd backend
-          npm ci
+          cd website
+          yarn install --frozen-lockfile
 
-      - name: Deploy Worker
+      - name: Build website
+        run: |
+          cd website
+          yarn build
+
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: 'backend'
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy website/dist --project-name=nipo-website
