@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.1...v0.2.2) (2026-06-14)
+
+
+### Bug Fixes
+
+* **cli:** implement cross-instance status tracking and command ([5739fde](https://github.com/ngtuonghy/nipo-tunnel/commit/5739fdedaa59fd89bd9bf1aa6c5aef312c03be9b))
+
 ## [0.2.1](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.0...v0.2.1) (2026-06-13)
 
 
