@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.3...v0.2.4) (2026-06-15)
+
+
+### Bug Fixes
+
+* **cli:** use net.LookupHost to verify DNS propagation ([736f556](https://github.com/ngtuonghy/nipo-tunnel/commit/736f5562d94138288315547bcaecec51e60267eb))
+
 ## [0.2.3](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.2...v0.2.3) (2026-06-14)
 
 
