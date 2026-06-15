@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.5...v0.2.6) (2026-06-15)
+
+
+### Bug Fixes
+
+* **cli:** align forwarding tunnel columns and requests log in TUI ([4f1bcc1](https://github.com/ngtuonghy/nipo-tunnel/commit/4f1bcc15cd82cb9f9f93ab533b095fa6c405fcb1))
+
 ## [0.2.5](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.4...v0.2.5) (2026-06-15)
 
 
