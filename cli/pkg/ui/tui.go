@@ -530,6 +530,17 @@ func (m TunnelModel) View() string {
 	// 4. Render Forwarding Info
 	if allDone && !isError {
 		isMulti := len(m.Tunnels) > 1
+		maxUrlLen := 0
+		for _, t := range m.Tunnels {
+			urlStr := t.PublicURL
+			if urlStr == "" {
+				urlStr = t.NodeURL
+			}
+			if len(urlStr) > maxUrlLen {
+				maxUrlLen = len(urlStr)
+			}
+		}
+
 		for i, t := range m.Tunnels {
 			label := tr.Forwarding
 			if isMulti {
@@ -542,21 +553,29 @@ func (m TunnelModel) View() string {
 
 			// If PublicURL is available, show it. Otherwise, fallback to NodeURL.
 			if t.PublicURL != "" {
-				pubStr := urlStyle.Render(t.PublicURL) + lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(fmt.Sprintf(" -> http://localhost:%d", t.Config.Port))
+				padding := ""
+				if len(t.PublicURL) < maxUrlLen {
+					padding = strings.Repeat(" ", maxUrlLen - len(t.PublicURL))
+				}
+				pubStr := urlStyle.Render(t.PublicURL) + padding + lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(fmt.Sprintf(" -> http://localhost:%d", t.Config.Port))
 				if isMulti {
-					nameFormat := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("220")).Width(maxNameLen).Render(t.Config.Name)
+					nameFormat := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("220")).Width(maxNameLen + 2).Render(t.Config.Name)
 					doc += labelStyle.Render(label) + nameFormat + pubStr + "\n"
 				} else {
 					doc += labelStyle.Render(label) + pubStr + "\n"
 				}
 				label = ""
 			} else if t.NodeURL != "" {
-				nodeStr := fmt.Sprintf("%s -> http://localhost:%d", t.NodeURL, t.Config.Port)
+				padding := ""
+				if len(t.NodeURL) < maxUrlLen {
+					padding = strings.Repeat(" ", maxUrlLen - len(t.NodeURL))
+				}
+				nodeStr := valStyle.Render(t.NodeURL) + padding + lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(fmt.Sprintf(" -> http://localhost:%d", t.Config.Port))
 				if isMulti {
-					nameFormat := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("220")).Width(maxNameLen).Render(t.Config.Name)
-					doc += labelStyle.Render(label) + nameFormat + valStyle.Render(nodeStr) + "\n"
+					nameFormat := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("220")).Width(maxNameLen + 2).Render(t.Config.Name)
+					doc += labelStyle.Render(label) + nameFormat + nodeStr + "\n"
 				} else {
-					doc += labelStyle.Render(label) + valStyle.Render(nodeStr) + "\n"
+					doc += labelStyle.Render(label) + nodeStr + "\n"
 				}
 				label = ""
 			}
