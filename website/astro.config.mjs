@@ -10,6 +10,7 @@ export default defineConfig({
 			logo: {
 				src: './src/assets/logo.png',
 			},
+			favicon: '/favicon.png',
 			defaultLocale: 'root',
 			locales: {
 				root: {

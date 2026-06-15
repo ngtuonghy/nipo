@@ -15,10 +15,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/ngtuonghy/nipo-tunnel">
-    <img src="assets/logo.png" alt="Logo" width="160" height="160" style="border-radius: 20px;">
+    <img src="../assets/logo.png?v=2" alt="Logo" width="240">
   </a>
 
-<h3 align="center">NIPO TUNNEL</h3>
+<h3 align="center">Nipo Tunnel</h3>
 
   <p align="center">
     Công cụ tạo HTTP tunnel bảo mật từ local ra internet hoàn toàn miễn phí. Sử dụng mạng lưới Cloudflare - không cần tài khoản, không cần cấu hình.
@@ -84,10 +84,10 @@ Nipo là công cụ CLI nhẹ giúp đưa server local của bạn lên public i
 
 ### Công nghệ sử dụng
 
-* [![Go][Go-badge]][Go-url]
-* [![Node.js][Node-badge]][Node-url]
-* [![Cloudflare Workers][Cloudflare-badge]][Cloudflare-url]
-* [![Charm][Charm-badge]][Charm-url]
+[![Go][Go-badge]][Go-url]
+[![Node.js][Node-badge]][Node-url]
+[![Cloudflare Workers][Cloudflare-badge]][Cloudflare-url]
+[![Charm][Charm-badge]][Charm-url]
 
 <p align="right">(<a href="#readme-top">quay lại đầu trang</a>)</p>
 
@@ -206,10 +206,7 @@ chmod +x ~/.nipo/bin/cloudflared
 <!-- ROADMAP -->
 ## Lộ trình phát triển
 
-- [ ] Hỗ trợ TLS / HTTPS cho local backend.
 - [ ] Gắn Custom Domain (xác thực qua CNAME).
-- [ ] Dashboard hiển thị web để kiểm tra request.
-- [ ] Hỗ trợ chuyển tiếp cổng TCP raw.
 
 Xem [các issues đang mở](https://github.com/ngtuonghy/nipo-tunnel/issues) để biết danh sách đầy đủ các tính năng dự kiến (và lỗi đã biết).
 

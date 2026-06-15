@@ -7,12 +7,18 @@ hero:
   image:
     file: ../../../assets/logo.png
   actions:
-    - text: Xem hướng dẫn
+    - text: Bắt Đầu Ngay
       link: /vi/guides/introduction/
       icon: right-arrow
+      variant: primary
+    - text: Xem trên GitHub
+      link: https://github.com/ngtuonghy/nipo-tunnel
+      icon: external
+      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import demoImage from '../../../assets/demo.jpg';
 
 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', marginTop: '-2rem', marginBottom: '3rem' }}>
   <a href="https://www.npmjs.com/package/nipo-tunnel">
@@ -27,6 +33,24 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   <a href="https://github.com/ngtuonghy/nipo-tunnel/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/ngtuonghy/nipo-tunnel?style=for-the-badge&color=4f46e5" alt="License" />
   </a>
+</div>
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center', marginBottom: '4rem', marginTop: '2rem' }}>
+  <div style={{ flex: '1', minWidth: '280px', textAlign: 'left' }}>
+    <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', marginTop: 0 }}>Khởi động siêu tốc</h2>
+    <p style={{ opacity: 0.8, marginBottom: '1.5rem' }}>Không cần đăng ký tài khoản. Chỉ cần cài đặt và mở port ra public internet ngay lập tức.</p>
+
+```bash
+# Cài đặt công cụ
+npm install -g nipo-tunnel
+
+# Mở port 3000 ra internet
+nipo http 3000
+```
+  </div>
+  <div style={{ flex: '1.4', minWidth: '350px' }}>
+    <img src={demoImage.src} alt="Nipo Tunnel Demo" style={{ borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', width: '100%', border: '1px solid rgba(255,255,255,0.1)' }} />
+  </div>
 </div>
 
 ## Vì sao chọn Nipo?
@@ -46,6 +70,48 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 </CardGrid>
 
-<div style="text-align: center; margin-top: 4rem; opacity: 0.6; font-size: 0.9rem;">
-  Phát triển bởi ❤️ ngtuonghy
+## Cách thức hoạt động
+
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '3rem', marginBottom: '4rem', fontSize: '0.9rem' }}>
+  <div style={{ padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--sl-color-gray-5)', backgroundColor: 'var(--sl-color-bg-nav)', textAlign: 'center', minWidth: '160px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', color: 'var(--sl-color-text-accent)' }}><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line></svg></div>
+    <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Máy chủ Local</div>
+    <div style={{ opacity: 0.8 }}><code>localhost:3000</code></div>
+  </div>
+
+  <div style={{ color: 'var(--sl-color-text-accent)', fontWeight: 'bold', fontSize: '1.5rem' }}>⟷</div>
+
+  <div style={{ padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--sl-color-gray-5)', backgroundColor: 'var(--sl-color-bg-nav)', textAlign: 'center', minWidth: '160px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', color: 'var(--sl-color-text-accent)' }}><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div>
+    <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Nipo CLI</div>
+    <div style={{ opacity: 0.8 }}>Instant Proxy</div>
+  </div>
+
+  <div style={{ color: 'var(--sl-color-text-accent)', fontWeight: 'bold', fontSize: '1.5rem' }}>⟷</div>
+
+  <div style={{ padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--sl-color-gray-5)', backgroundColor: 'var(--sl-color-bg-nav)', textAlign: 'center', minWidth: '160px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', color: 'var(--sl-color-text-accent)' }}><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div>
+    <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Cloudflare</div>
+    <div style={{ opacity: 0.8 }}>Mạng lưới Edge</div>
+  </div>
+
+  <div style={{ color: 'var(--sl-color-text-accent)', fontWeight: 'bold', fontSize: '1.5rem' }}>⟷</div>
+
+  <div style={{ padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--sl-color-gray-5)', backgroundColor: 'var(--sl-color-bg-nav)', textAlign: 'center', minWidth: '160px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', color: 'var(--sl-color-text-accent)' }}><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+    <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Mạng Internet</div>
+    <div style={{ opacity: 0.8 }}><code>myapp.nipo-tunnel.online</code></div>
+  </div>
+</div>
+
+<div style={{ marginTop: '6rem', paddingTop: '2rem', borderTop: '1px solid var(--sl-color-hairline)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', fontSize: '0.9rem', opacity: 0.8 }}>
+  <div style={{ textAlign: 'left' }}>
+    Phát hành theo <a href="https://github.com/ngtuonghy/nipo-tunnel/blob/main/LICENSE" target="_blank" style={{ color: 'inherit', textDecoration: 'underline' }}>Giấy phép MIT</a>.<br/>
+    Bản quyền © 2026 <a href="https://github.com/ngtuonghy" target="_blank" style={{ color: 'inherit', fontWeight: 'bold', textDecoration: 'none' }}>ngtuonghy</a>.
+  </div>
+  <div style={{ display: 'flex', gap: '1.5rem' }}>
+    <a href="https://github.com/ngtuonghy/nipo-tunnel" target="_blank" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
+    <a href="https://www.npmjs.com/package/nipo-tunnel" target="_blank" style={{ color: 'inherit', textDecoration: 'none' }}>NPM</a>
+    <a href="/vi/guides/introduction/" style={{ color: 'inherit', textDecoration: 'none' }}>Tài liệu</a>
+  </div>
 </div>
