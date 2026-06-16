@@ -116,17 +116,7 @@ func StartProxy(ctx context.Context, tunnelName string, targetPort int) (*Proxy,
 	logger := charmlog.New(io.Discard)
 	rp.ErrorLog = logger.StandardLog(charmlog.StandardLogOptions{ForceLevel: charmlog.ErrorLevel})
 
-	// Preserve original director behavior, but override Host and Origin
-	// to fool Next.js and Webpack Dev Server into accepting the WebSocket upgrade.
-	// Many dev servers drop the connection (causing 502) if Host or Origin don't match localhost.
-	originalDirector := rp.Director
-	rp.Director = func(req *http.Request) {
-		originalDirector(req)
-		req.Host = targetURL.Host
-		if req.Header.Get("Origin") != "" {
-			req.Header.Set("Origin", targetURL.String())
-		}
-	}
+
 
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Intercept internal ping requests to hide them from logs and avoid hitting the user's local server
