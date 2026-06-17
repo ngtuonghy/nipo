@@ -351,15 +351,40 @@ func (m TunnelModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, nil
 
 	case heartbeatMsg:
+		var cmds []tea.Cmd
+		// Check if any subdomains expired (e.g. after sleep/wake cycle)
+		if len(msg.expiredSubdomains) > 0 {
+			for _, expSub := range msg.expiredSubdomains {
+				for i, t := range m.Tunnels {
+					if t.Config.Subdomain == expSub && t.State == stateDone {
+						m.Tunnels[i].State = stateRegistering
+						cmds = append(cmds, registerTask(m.Ctx, i, m.BackendURL, t.Config.Subdomain, t.NodeURL))
+					}
+				}
+			}
+		}
+
 		// Re-schedule the next heartbeat with the current active subdomains
 		var activeSubdomains []string
 		for _, t := range m.Tunnels {
-			if t.State == stateDone && t.Config.Subdomain != "" {
+			// Only include subdomains that are currently stateDone and NOT in the expired list we are re-registering
+			isExpired := false
+			for _, expSub := range msg.expiredSubdomains {
+				if t.Config.Subdomain == expSub {
+					isExpired = true
+					break
+				}
+			}
+			if t.State == stateDone && t.Config.Subdomain != "" && !isExpired {
 				activeSubdomains = append(activeSubdomains, t.Config.Subdomain)
 			}
 		}
 		if m.BackendURL != "" && len(activeSubdomains) > 0 {
-			return m, heartbeatTask(m.Ctx, m.BackendURL, activeSubdomains)
+			cmds = append(cmds, heartbeatTask(m.Ctx, m.BackendURL, activeSubdomains))
+		}
+
+		if len(cmds) > 0 {
+			return m, tea.Batch(cmds...)
 		}
 		return m, nil
 

@@ -40,7 +40,8 @@ type registerCompleteMsg struct {
 }
 
 type heartbeatMsg struct {
-	err error
+	err               error
+	expiredSubdomains []string
 }
 
 type verifyDNSCompleteMsg struct {
@@ -225,6 +226,7 @@ func heartbeatTask(ctx context.Context, backendURL string, subdomains []string) 
 		}
 
 		client := &http.Client{Timeout: 5 * time.Second}
+		var expired []string
 		for _, subdomain := range subdomains {
 			payload := map[string]string{"subdomain": subdomain}
 			jsonData, err := json.Marshal(payload)
@@ -238,10 +240,14 @@ func heartbeatTask(ctx context.Context, backendURL string, subdomains []string) 
 			req.Header.Set("Content-Type", "application/json")
 			req.Header.Set("Authorization", "Bearer nipo-secret")
 			resp, err := client.Do(req)
-			if err == nil {
-				resp.Body.Close()
+			if err != nil {
+				continue
 			}
+			if resp.StatusCode == http.StatusNotFound {
+				expired = append(expired, subdomain)
+			}
+			resp.Body.Close()
 		}
-		return heartbeatMsg{}
+		return heartbeatMsg{expiredSubdomains: expired}
 	}
 }
