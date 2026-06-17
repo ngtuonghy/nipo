@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.3.0...v0.3.1) (2026-06-17)
+
+
+### Bug Fixes
+
+* **cli:** auto re-register subdomain when KV expired after sleep/wake cycle ([5fb0494](https://github.com/ngtuonghy/nipo-tunnel/commit/5fb049427cd4dc39d7aca702ea3d509bd197dc5f))
+
 ## [0.3.0](https://github.com/ngtuonghy/nipo-tunnel/compare/v0.2.7...v0.3.0) (2026-06-16)
 
 

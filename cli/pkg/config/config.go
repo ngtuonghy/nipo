@@ -16,7 +16,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-var Version = "v0.3.0" // x-release-please-version
+var Version = "v0.3.1" // x-release-please-version
 // TunnelConfig holds specifications for a single tunnel.
 type TunnelConfig struct {
 	Name      string `mapstructure:"name"`
